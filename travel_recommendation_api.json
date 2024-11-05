@@ -1,0 +1,11 @@
+Now, you need to create logic in your JavaScript file to show results for your recommendations.
+
+Note: You should check the output of your code while developing your JavaScript. Directions to view your output are on the next page of these instructions.
+
+Fetch data from the travel_recommendation_api.json file using the fetch API method, from there you can fetch travel-related details, such as the name of the place. You need to have your own images for every imageUrl in the JSON file.
+
+
+
+Fetch the data from the JSON using the fetch API() method. To check if you can access the data, you use console.log to see if the result is displayed.
+
+It is good if the console.log logs the data. Otherwise, you need to look for a different API.

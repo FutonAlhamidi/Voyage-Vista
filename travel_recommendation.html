@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voyage Vista</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"> <!-- Logo Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet"> <!-- New Font for Introduction -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet"> <!-- New font for heading -->
+    <style>
+        /* General Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif; /* Using Roboto font for body text */
+        }
+
+        /* Body Styling */
+        body {
+            background-image: url('https://images.unsplash.com/photo-1521747116042-5a810fda9664'); /* Background image of city from above */
+            background-size: cover; /* Cover the entire viewport */
+            background-position: center; /* Center the image */
+            color: white; /* White text color for contrast */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Align items to the left */
+            min-height: 100vh;
+            padding-top: 80px; /* Space for the navbar */
+            text-align: left; /* Left-aligned text */
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            width: 100%;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 128, 0.9)); /* Gradient from black to dark blue */
+            color: white;
+            padding: 10px 0; /* Thinner navbar */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: fixed; /* Fixed position for the navbar */
+            top: 0; /* Sticks to the top of the viewport */
+            z-index: 1000; /* Ensure it stays above other content */
+        }
+
+        .navbar .logo {
+            font-size: 36px; /* Larger font size for logo */
+            font-weight: bold;
+            font-family: 'Pacifico', cursive; /* Unique logo font */
+            color: #ffffff; /* White color for logo */
+            margin-left: 20px;
+        }
+
+        .navbar a {
+            color: #ffffff; /* White color for links */
+            text-decoration: none;
+            padding: 10px 20px; /* Adjusted padding for links */
+            border-radius: 5px; /* Rounded corners for links */
+            margin: 0 10px;
+            transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+        }
+
+        .navbar a:hover {
+            background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+            transform: scale(1.05); /* Slight scale effect on hover */
+        }
+
+        /* Introduction and About Us Styling */
+        .section {
+            display: none; /* Hide all sections by default */
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px; /* Margin around the introduction section */
+            max-width: 600px; /* Limit width for better readability */
+        }
+
+        .introduction, .about-us {
+            display: block; /* Show the introduction by default */
+        }
+
+        .introduction h1, .about-us h1, .contact h1 {
+            font-family: 'Montserrat', sans-serif; /* New font for heading */
+            font-size: 48px; /* Larger font size for the heading */
+            margin-bottom: 10px; /* Space below the heading */
+        }
+
+        .introduction p, .about-us p, .contact p {
+            font-family: 'Lora', serif; /* New font for paragraph */
+            font-size: 16px; /* Smaller font size for paragraph */
+            line-height: 1.5; /* Spacing between lines */
+        }
+
+        /* Book Now Button Styling */
+        .book-now {
+            display: inline-block;
+            padding: 12px 24px; /* Padding for the button */
+            font-size: 16px; /* Font size for the button */
+            background-color: #28a745; /* Green background for the button */
+            color: white; /* White text color */
+            border: none;
+            border-radius: 30px; /* Rounded button */
+            text-decoration: none; /* No underline */
+            margin-top: 20px; /* Space above the button */
+            transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+        }
+
+        .book-now:hover {
+            background-color: #218838; /* Darker green on hover */
+            transform: scale(1.05); /* Scale effect on hover */
+        }
+
+        /* About Us Specific Styling */
+        .about-us {
+            display: none; /* Hide About Us section initially */
+        }
+
+        /* Contact Form Styling */
+        .contact {
+            display: none; /* Hide Contact Us section initially */
+        }
+
+        .contact label {
+            display: block; /* Block display for labels */
+            margin-bottom: 5px; /* Space below label */
+            font-weight: bold; /* Bold labels */
+        }
+
+        .contact input[type="text"],
+        .contact input[type="email"],
+        .contact textarea {
+            width: 100%; /* Full width inputs */
+            padding: 10px; /* Padding inside inputs */
+            margin-bottom: 15px; /* Space below inputs */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+            font-size: 16px; /* Font size for inputs */
+        }
+
+        .contact textarea {
+            resize: none; /* Disable resizing */
+            height: 100px; /* Fixed height for textarea */
+        }
+
+        .contact button {
+            background-color: #28a745; /* Green button */
+            color: white; /* White text color */
+            border: none; /* No border */
+            border-radius: 5px; /* Rounded corners */
+            padding: 10px 15px; /* Padding inside button */
+            cursor: pointer; /* Pointer cursor */
+            font-size: 16px; /* Font size for button */
+            transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+        }
+
+        .contact button:hover {
+            background-color: #218838; /* Darker green on hover */
+            transform: scale(1.05); /* Scale effect on hover */
+        }
+
+        /* Search Bar Styling */
+        .search-bar {
+            display: none; /* Initially hide search bar */
+            align-items: center;
+            margin-right: 20px; /* Space from the right */
+        }
+
+        .search-bar input[type="text"] {
+            padding: 12px 20px; /* Increased padding for input */
+            font-size: 16px;
+            border: 2px solid #ffffff; /* White border */
+            border-radius: 30px; /* More rounded search box */
+            outline: none;
+            width: 300px; /* Wider input for better usability */
+            color: #333; /* Dark color for input text */
+            position: relative; /* Positioning for placeholder text */
+        }
+
+        .search-bar button {
+            padding: 12px 15px; /* Adjusted padding for buttons */
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #0056b3; /* Dark blue for buttons */
+            color: white;
+            border-radius: 30px; /* More rounded button */
+            margin-left: 10px;
+            transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+        }
+
+        .search-bar button:hover {
+            background-color: #004494; /* Darker blue on hover */
+            transform: scale(1.05); /* Scale effect on hover */
+        }
+
+        /* Recommendations Section Styling */
+        .recommendations {
+            display: flex; /* Flexbox for layout */
+            flex-wrap: wrap; /* Allow items to wrap */
+            justify-content: flex-start; /* Align items to the start */
+            margin: 20px; /* Margin around the recommendations section */
+            color: black; /* Black text color for contrast */
+        }
+
+        .recommendation-item {
+            background-color: white; /* White background for individual recommendations */
+            border-radius: 10px; /* Rounded corners */
+            padding: 20px; /* Padding inside each recommendation box */
+            margin: 10px; /* Margin between boxes */
+            width: calc(33% - 20px); /* Three items per row with some margin */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
+        }
+
+        .recommendation-item img {
+            width: 100%; /* Full width for images */
+            border-radius: 5px; /* Rounded corners for images */
+            height: 200px; /* Fixed height for images */
+            object-fit: cover; /* Cover the space while maintaining aspect ratio */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start; /* Align items to the left on small screens */
+            }
+            .navbar .logo {
+                margin-bottom: 10px;
+            }
+            .section {
+                margin: 10px; /* Adjust margin for small screens */
+            }
+            .search-bar {
+                margin-top: 10px; /* Space above the search bar */
+                display: flex; /* Show search bar on small screens */
+            }
+            .recommendation-item {
+                width: calc(50% - 20px); /* Two items per row on small screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .recommendation-item {
+                width: 100%; /* Full width for mobile screens */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div class="logo">Voyage Vista</div>
+        <div>
+            <a href="#" onclick="showSection('introduction'); showSearch(true);">Home</a>
+            <a href="#" onclick="showSection('about-us'); showSearch(false);">About Us</a>
+            <a href="#" onclick="showSection('contact'); showSearch(false);">Contact Us</a>
+        </div>
+        <div class="search-bar" id="searchBar">
+            <input type="text" id="searchInput" placeholder="Search...">
+            <button onclick="performSearch()">Search</button>
+            <button onclick="resetSearch()">Clear</button>
+        </div>
+    </div>
+
+    <!-- Introduction Section -->
+    <div class="section introduction" id="introduction">
+        <h1>Welcome to Voyage Vista</h1>
+        <p>Your gateway to exploring the world's most beautiful destinations. Discover recommendations, tips, and travel guides to enhance your travel experience.</p>
+        <p>Join us in exploring cultures, cuisines, and adventures that await you!</p>
+        <a href="#" class="book-now">Book Now</a> <!-- Book Now button -->
+    </div>
+
+    <!-- About Us Section -->
+    <div class="section about-us" id="about-us">
+        <h1>About Us</h1>
+        <p>Welcome to Voyage Vista, your premier travel partner dedicated to providing the best travel experiences...</p>
+        <h2>Meet Our Team</h2>
+        <p><strong>John Doe</strong>: Founder & CEO</p>
+        <p><strong>Jane Smith</strong>: Chief Operating Officer</p>
+        <p><strong>Emily Johnson</strong>: Marketing Manager</p>
+    </div>
+
+    <!-- Contact Us Section -->
+    <div class="section contact" id="contact">
+        <h1>Contact Us</h1>
+        <p>If you have any questions or inquiries, please fill out the form below:</p>
+        <form>
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Your Name" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <label for="message">Message</label>
+            <textarea id="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+
+    <!-- Recommendations Section -->
+    <div class="recommendations" id="recommendations">
+        <h2>Travel Recommendations</h2>
+        <div class="recommendation-item">
+            <h3>Beach: Maldives</h3>
+            <img src="https://www.mexatk.com/wp-content/uploads/2016/08/%D8%B5%D9%88%D8%B1-%D8%AE%D9%84%D9%81%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D9%85%D8%A7%D9%84%D8%AF%D9%8A%D9%81-1.jpg" alt="Maldives Beach">
+            <p>Experience the crystal-clear waters and white sandy beaches, perfect for relaxation and water sports.</p>
+        </div>
+        <div class="recommendation-item">
+            <h3>Beach: Bora Bora</h3>
+            <img src="https://th.bing.com/th/id/OIP.cBBNn_Op97ZzmvMn90ZNQAHaE8?rs=1&pid=ImgDetMain" alt="Bora Bora Beach">
+            <p>Known for its stunning lagoon and coral reefs, Bora Bora is ideal for snorkeling and luxury vacations.</p>
+        </div>
+        <div class="recommendation-item">
+            <h3>Temple: Angkor Wat, Cambodia</h3>
+            <img src="https://th.bing.com/th/id/OIP.nhH9nGh8onFNyFdWs9FhWwEsDP?rs=1&pid=ImgDetMain" alt="Angkor Wat Temple">
+            <p>This historic temple complex is a UNESCO World Heritage site and an architectural masterpiece.</p>
+        </div>
+        <div class="recommendation-item">
+            <h3>Temple: The Parthenon, Greece</h3>
+            <img src="https://th.bing.com/th/id/R.e993cd615cf05acbba724e036684f1f0?rik=liTUcqpjAU1OQw&pid=ImgRaw&r=0" alt="Parthenon Temple">
+            <p>Explore the ancient ruins of this iconic temple dedicated to the goddess Athena, overlooking Athens.</p>
+        </div>
+        <div class="recommendation-item">
+            <h3>Country: Japan</h3>
+            <img src="https://th.bing.com/th/id/OIP.GsRi0Zww8iPTwBv3f1jkOwAAAA?rs=1&pid=ImgDetMain" alt="Japan">
+            <p>Experience a rich culture, stunning landscapes, and delicious cuisine from the bustling streets of Tokyo to the serene temples in Kyoto.</p>
+        </div>
+        <div class="recommendation-item">
+            <h3>Country: Italy</h3>
+            <img src="https://th.bing.com/th/id/OIP.INB7nsN_TGttYNu4sINevQHaEW?rs=1&pid=ImgDetMain" alt="Italy">
+            <p>From the historical sites of Rome to the romantic canals of Venice, Italy is a feast for the senses.</p>
+        </div>
+    </div>
+
+    <!-- Link to JavaScript file -->
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none'; // Hide each section
+            });
+            // Show the selected section
+            document.getElementById(sectionId).style.display = 'block'; // Show the desired section
+        }
+
+        function showSearch(show) {
+            document.getElementById('searchBar').style.display = show ? 'flex' : 'none'; // Show or hide the search bar
+        }
+
+        function performSearch() {
+            const query = document.getElementById('searchInput').value;
+            alert(Searching for: ${query}); // Replace this with actual search logic
+        }
+
+        function resetSearch() {
+            document.getElementById('searchInput').value = ''; // Clear the search input
+        }
+
+        // Initialize with home section and search bar visible
+        window.onload = function() {
+            showSection('introduction');
+            showSearch(true);
+        };
+    </script>
+
+</body>
+</html>
